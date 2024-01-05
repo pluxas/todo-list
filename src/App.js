@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import ListItem from "./components/ListItem/ListItem";
 import Modal from "./components/Modal/Modal";
 import Nav from "./components/Nav/Nav";
+import {  useTranslation } from 'react-i18next'
 
 const date = `${new Date().getDate() < 10 ? '0' + new Date().getDate() : new Date().getDate()}.${new Date().getMonth() + 1 < 10 ?  + new Date().getMonth() + 1: new Date().getMonth() + 1}.${new Date().getFullYear()}`
 
@@ -26,6 +27,9 @@ function App() {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [search, setSearch] = useState('')
+
+
+  const [t, i18n] = useTranslation()
 
   // useEffect() - выполняет функцию после рендера компонента  
   // Первый аргумент - функция , второй - массив зависимости
@@ -79,6 +83,11 @@ function App() {
   const onDeleteTodos = (id) => {
     setTodo([...todo.filter(todo => todo.id !== id)])
   }
+  
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng)
+  }
 
   return (
     <div className="wrapper">
@@ -116,6 +125,9 @@ function App() {
         setContent={setContent}
         addTodo={addTodo}
       />
+      {/* <button onClick={() => changeLanguage('ru')}>ru</button>
+      <button onClick={() => changeLanguage('en')}>en</button>
+      <p>{t('hello')}</p> */}
     </div>
   );
 }
